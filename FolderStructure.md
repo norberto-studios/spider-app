@@ -2,7 +2,7 @@
 📦 spider-app/
 ├── 📂 backend/             # Python backend (WebSockets, flashing, API)
 │   ├── 📂 src/
-│   │   ├── flash_server.py  # WebSockets flashing logic
+│   │   ├── server.py  # WebSockets flashing logic
 │   │   ├── api.py          # API server (if needed)
 │   │   ├── utils.py        # Common utilities
 │   ├── requirements.txt    # Python dependencies
@@ -18,14 +18,15 @@
 │   ├── platformio.ini      # PlatformIO configuration
 │   ├── README.md
 │
-├── 📂 frontend/            # TypeScript (React/Next.js UI)
+├── 📂 frontend/            # Svelte 5 Application
 │   ├── 📂 src/
-│   │   ├── components/     # React components
-│   │   ├── pages/          # Next.js pages (if using Next.js)
-│   │   ├── utils/          # Helper functions
-│   ├── package.json        # Dependencies
-│   ├── tsconfig.json       # TypeScript config
-│   ├── vite.config.ts      # Vite config (if using Vite)
+│   │   ├── components/     # Svelte components
+│   │   ├── routes/          # SvelteKit routes
+│   │   ├── lib/            # Utility functions and libraries
+│   ├── package.json        # Project dependencies and scripts
+│   ├── svelte.config.js    # Svelte configuration
+│   ├── tsconfig.json      # TypeScript configuration
+│   ├── vite.config.ts     # Vite configuration (for build and dev server)
 │   ├── README.md
 │
 ├── 📂 docs/                # Documentation
