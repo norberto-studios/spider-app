@@ -8,6 +8,7 @@
 
 - [Overview](#overview)
 - [Features](#features)
+- [Architecture](#architecture)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -34,6 +35,58 @@
 - **Firmware Flashing**: Python-based flashing using **WebSockets**.
 - **Cross-Platform**: Runs on **Windows, macOS, and Linux**.
 - **Open-Source**: Contributions are welcome.
+
+---
+
+## Architecture
+
+The SpiderApp Project uses a three-tier architecture with TypeScript frontend, Python middleware, and C++ embedded components:
+
+%% Backend Layer
+subgraph "Backend (Python)"
+F[WebSocket Server] --> G[Firmware Manager]
+G --> H[Serial Communication]
+G --> I[Binary Flasher]
+end
+
+%% Embedded Layer
+subgraph "Embedded (C++/PlatformIO)"
+J[ESP32C3 Firmware] --> K[UI Component Library]
+J --> L[Hardware Drivers]
+J --> M[Communication Protocol]
+end
+
+%% Connections between layers
+E <-->|WebSocket Communication| F
+I -->|Flashing| J
+H <-->|Serial Data| M
+B <-->|UI Simulation| K
+
+%% Physical Hardware
+subgraph "Hardware"
+N[Seeed XIAO ESP32C3]
+end
+
+J -->|Runs on| N
+
+%% Legend/Style
+classDef typescript fill:#3178c6,color:white,stroke:#222;
+classDef python fill:#306998,color:white,stroke:#222;
+classDef cpp fill:#00599c,color:white,stroke:#222;
+classDef hardware fill:#444,color:white,stroke:#222;
+
+class A,B,C,D,E typescript;
+class F,G,H,I python;
+class J,K,L,M cpp;
+class N hardware;
+
+The architecture consists of:
+1. **Frontend (TypeScript/Svelte)**: Web-based UI that provides the simulator interface and control panel
+2. **Backend (Python)**: Handles WebSocket communication and firmware flashing to the device
+3. **Embedded (C++/PlatformIO)**: Firmware that runs on the ESP32C3 microcontroller
+4. **Hardware**: The Seeed XIAO ESP32C3 device that runs the embedded firmware
+
+Data flows between these components through WebSocket for remote control and Serial communication for direct hardware interaction.
 
 ---
 
