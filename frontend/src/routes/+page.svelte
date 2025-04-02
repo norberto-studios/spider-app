@@ -1,11 +1,10 @@
-<script>
+<script lang="ts">
     import {Canvas, T} from '@threlte/core'
     // Import additional helpers
-    import {OrbitControls} from '@threlte/extras'
+    // import {OrbitControls} from '@threlte/extras'
 
     import AngleSlider from './../lib/AngleSliderComponent.svelte';
     import ModelGroup from './../lib/GltfModelLoaderComponent.svelte';
-
 
     const legsController = [1, 2, 3, 4, 5, 6, 7, 8]
 
@@ -15,12 +14,13 @@
         console.log("Selected legs:", selectedLegs);
     });
 
-    function handleShapeChange(event) {
+    function handleShapeChange(event: any) {
         selectedLegs = Number(event.target.value);
-        console.log(selectedLegs)
+        console.log("handleShapeChange", selectedLegs)
     }
 
-    function angleToRadians(angle) {
+    // Utils
+    function angleToRadians(angle: any) {
         return angle * (Math.PI / 180);
     }
 
@@ -36,7 +36,7 @@
     const offset2 = 2; // Distance from hotpink to red
     const offset3 = 2; // Distance from red to yellow
 
-    function handleAngleChange(event) {
+    function handleAngleChange(event: any) {
         if (event.target.id == 0) {
             angle1 = Number(event.target.value);
         } else if (event.target.id == 1) {
@@ -56,58 +56,16 @@
     let redGroupRef = $state(null);
     let yellowGroupRef = $state(null);
 
-    function setHotpinkGroupRef(ref) {
+    function setHotpinkGroupRef(ref: any) {
         hotpinkGroupRef = ref;
     }
 
-    function setRedGroupRef(ref) {
+    function setRedGroupRef(ref: any) {
         redGroupRef = ref;
     }
 
-    function setYellowGroupRef(ref) {
+    function setYellowGroupRef(ref: any) {
         yellowGroupRef = ref;
-    }
-
-
-    // Function to handle transform controls changes
-    function handleGizmoChange(event) {
-        // Determine which box is being rotated and log information
-        let targetName = "unknown";
-        let rotationValues = {};
-
-        if (event.target.object === hotpinkGroupRef) {
-            targetName = "Hotpink";
-            rotationValues = {
-                x: hotpinkGroupRef.rotation.x,
-                y: hotpinkGroupRef.rotation.y,
-                z: hotpinkGroupRef.rotation.z
-            };
-        } else if (event.target.object === redGroupRef) {
-            targetName = "Red";
-            rotationValues = {
-                x: redGroupRef.rotation.x,
-                y: redGroupRef.rotation.y,
-                z: redGroupRef.rotation.z
-            };
-        } else if (event.target.object === yellowGroupRef) {
-            targetName = "Yellow";
-            rotationValues = {
-                x: yellowGroupRef.rotation.x,
-                y: yellowGroupRef.rotation.y,
-                z: yellowGroupRef.rotation.z
-            };
-        }
-
-        console.log(`${targetName} Box Rotated:`);
-        console.log(`X: ${(rotationValues.x * 180 / Math.PI).toFixed(2)}°`);
-        console.log(`Y: ${(rotationValues.y * 180 / Math.PI).toFixed(2)}°`);
-        console.log(`Z: ${(rotationValues.z * 180 / Math.PI).toFixed(2)}°`);
-    }
-
-    let activeTransformObject = $state(null);
-
-    function setActiveTransform(object) {
-        activeTransformObject = object;
     }
 
 
@@ -159,15 +117,6 @@
         />
 
     </div>
-
-
-    <!--    Display 3D -->
-    <!--    <Canvas>-->
-    <!--        <T.Mesh rotation.z={0} rotation.y={rotationY}>-->
-    <!--            <T.BoxGeometry args={[1, 2, 1]} />-->
-    <!--            <T.MeshBasicMaterial color="hotpink" />-->
-    <!--        </T.Mesh>-->
-    <!--    </Canvas>-->
 
     <div class="w-full h-1/2">
         <h1>3D Model</h1>
