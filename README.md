@@ -113,6 +113,8 @@ For support and inquiries:
 
 Follow us on social media for updates:
 
-    Instagram: @nstudios
+    TikTok: @nstudios0
+    Instagram: @nstudios0
+    YouTube: @nstudios0
 
 Thank you for using SpiderApp Project! 🚀
